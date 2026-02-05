@@ -1,0 +1,36 @@
+/* Reduce overall popup size */
+.compact-calendar {
+  font-size: 0.75rem;
+}
+
+/* Shrink date cells (the circles) */
+.compact-calendar td > span {
+  width: 1.6rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+    font-size: 0.6rem;
+}
+
+/* Header (February 2026) */
+.compact-calendar .p-datepicker-header {
+  padding: 0.25rem;
+}
+
+/* Weekday row (Su Mo Tu...) */
+.compact-calendar th {
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Tooltip bubble */
+.compact-tooltip .p-tooltip-text {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.4rem;
+  line-height: 1.1;
+}
+
+/* Tooltip arrow */
+.compact-tooltip .p-tooltip-arrow {
+  transform: scale(0.8);
+}
+

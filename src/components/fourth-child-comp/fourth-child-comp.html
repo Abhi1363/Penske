@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-end mx-5">
+    <button class="btn btn-outline-primary" (click)="backToFirst()"> ← Back</button>
+</div>
+
+
+<div *ngIf="UnitNumberInfo && recUnits && ownLoc">
+    <p><strong>Unit Number:</strong> {{ recUnits.unitNumber }}</p>
+    <p><strong>Status:</strong> {{ recUnits.unitStatus }}</p>
+    <p><strong>Class Code:</strong> {{ recUnits.unitClassCode }}</p>
+    <p><strong>Unit Type:</strong> {{ recUnits.unitType || 'N/A' }}</p>
+    <p><strong>Unit Description:</strong> {{ recUnits.unitDescription }}</p>
+    <p><strong>PM Due In Days:</strong> {{ recUnits.pmDueInDays }}</p>
+    <p><strong>Has Notes:</strong> {{ recUnits.hasNotes ? 'Yes' : 'No' }}</p>
+    <p><strong>Distance (Miles):</strong> {{ recUnits.distanceInMiles }}</p>
+    <p><strong>Owning Locations: </strong></p>
+    <p>Corp: {{ ownLoc.corp }} </p>
+    <p>Loc CD: {{ ownLoc.loc_cd }} </p>
+    <p>Loc type: {{ ownLoc.loc_type|| 'N/A' }} </p>
+    <p>Location type: {{ ownLoc.location_type|| 'N/A' }} </p>
+    <p>Loc name: {{ ownLoc.loc_name|| 'N/A' }} </p>
+    <p>Location Address: {{ ownLoc.locationAddress|| 'N/A' }} </p>
+    <p>Outbound code: {{ ownLoc.outbound_code|| 'N/A' }} </p>
+    <p>Region: {{ ownLoc.region|| 'N/A' }} </p>
+    <p>UTC Offset: {{ ownLoc.utc_offset|| 'N/A' }} </p>
+    <p>Daylight: {{ ownLoc.daylight|| 'N/A' }} </p>
+    <p>Region Name: {{ ownLoc.region_name|| 'N/A' }} </p>
+    <p>Area: {{ ownLoc.area|| 'N/A' }} </p>
+    <p>Area Name: {{ ownLoc.area_name|| 'N/A' }} </p>
+    <p>Controlling District: {{ ownLoc.controlling_district|| 'N/A' }} </p>
+    <p>Controlling District Name: {{ ownLoc.controlling_district_name|| 'N/A' }} </p>
+    <p>Branch: {{ ownLoc.branch|| 'N/A' }} </p>
+    <p>Branch Name: {{ ownLoc.branch_name|| 'N/A' }} </p>
+    <p>Phone Number: {{ ownLoc.phoneNumber|| 'N/A' }} </p>
+
+    <div *ngFor="let res of (recUnits?.assignedReservations || [])" class="card mb-3 p-3">
+
+        <h5 class="mb-3">Assigned Reservation Details</h5>
+
+        <table class="table table-sm table-bordered mb-0">
+            <tr>
+                <th>Reservation ID</th>
+                <td>{{ res.reservationId }}</td>
+            </tr>
+
+            <tr>
+                <th>Actual Drop-off Date</th>
+                <td>{{ res.dropOff.actualDropOffDate || 'N/A' }}</td>
+            </tr>
+
+            <tr>
+                <th>Actual Drop-off Time</th>
+                <td>{{ res.dropOff.actualDropOffTime || 'N/A' }}</td>
+            </tr>
+
+            <tr>
+                <th>Actual Drop-off UTC</th>
+                <td>{{ res.dropOff.actualDropOffUTCTimestamp || 'N/A' }}</td>
+            </tr>
+
+            <tr>
+                <th>Expected Drop-off Date</th>
+                <td>{{ res.dropOff.expectedDropOffDate || 'N/A' }}</td>
+            </tr>
+
+            <tr>
+                <th>Expected Drop-off Time</th>
+                <td>{{ res.dropOff.expectedDropOffTime || 'N/A' }}</td>
+            </tr>
+
+            <tr>
+                <th>Expected Drop-off UTC</th>
+                <td>{{ res.dropOff.expectedDropOffUTCTimestamp || 'N/A' }}</td>
+            </tr>
+        </table>
+
+    </div>
+
+
+
+
+</div>
