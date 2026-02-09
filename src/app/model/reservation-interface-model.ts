@@ -8,7 +8,16 @@ export interface Reservation {
   tripType: 'oneway' | 'roundtrip' | string;
   leaseType: string;
   colorIndicator: string;
+   assignedUnit?: {
+    unitNumber?: string;
+    unitStatus?: string;
+  };
 
+  assignedTowUnit?: {
+    unitNumber?: string;
+  };
+
+  cashDeposit?: boolean;
   
   pickUp: {pickUpDate: string;};
    consumerCustomer: {

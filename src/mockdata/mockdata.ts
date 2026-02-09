@@ -13,7 +13,7 @@ export const mockdata =
                                 "unitNumber": "99804278",
                                 "unitStatus": "Available Now",
                                 "unitClassCode": "9200",
-                                "unitType": null,
+                                "unitType": "LITE DUTY",
                                 "unitDescription": "Car Carrier",
                                 "pmDueInDays": "-94.00",
                                 "hasNotes": false,
@@ -67,7 +67,10 @@ export const mockdata =
                                 },
                                 "transmission": null,
                                 "transmissionToolTip": null,
-                                "optionalEquipment": {},
+                                "optionalEquipment": {
+                                    "RAMP": "RP",
+                                    "ROLL DOOR": "RD"
+                                },
                                 "cdlCategory": "NCDL",
                                 "cdlCategoryToolTip": "GVW < = 26000 lbs",
                                 "unitSource": "Penske",
@@ -90,16 +93,11 @@ export const mockdata =
                                     }
                                 ]
                             },
-
-
-
-
-
                             {
                                 "unitNumber": "99803647",
                                 "unitStatus": "Available Now",
                                 "unitClassCode": "9200",
-                                "unitType": null,
+                                "unitType": "LITE DUTY",
                                 "unitDescription": "Car Carrier",
                                 "pmDueInDays": "-142.00",
                                 "hasNotes": false,
@@ -153,7 +151,10 @@ export const mockdata =
                                 },
                                 "transmission": null,
                                 "transmissionToolTip": null,
-                                "optionalEquipment": {},
+                                "optionalEquipment": {
+                                    "RAMP": "RP",
+                                    "ROLL DOOR": "RD"
+                                },
                                 "cdlCategory": "NCDL",
                                 "cdlCategoryToolTip": "GVW < = 26000 lbs",
                                 "unitSource": "Penske",
