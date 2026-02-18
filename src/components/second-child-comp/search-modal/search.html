@@ -1,0 +1,88 @@
+@if(searchOpen()){
+<div class="fixed inset-0 flex items-center justify-center bg-black/20 z-10  " (click)="closeSearch()">
+  <div class="bg-white w-[450px] rounded-md border-gray-300 shadow-lg border absolute top-20 left-88 z-50 p-6"
+    (click)="$event.stopPropagation()">
+
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-md font-semibold text-gray-800">Reservation Search</h2>
+      <button class="text-gray-500 hover:text-gray-700 text-xl cursor-pointer" (click)="closeSearch()">&times;</button>
+    </div>
+
+    <div class="flex gap-4 mb-4">
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Date Within</label>
+        <select [ngModel]="dateWithin()" (ngModelChange)="dateWithin.set($event); onDateWithinChange()" 
+          class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Select Date</label>
+        @if(dateWithin() === 'daily'){
+        <p-datepicker [(ngModel)]="currentDate" [showIcon]="true" panelStyleClass="compact-calendar"
+          inputStyleClass="rounded-md px-3 h-8 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 w-full border ">
+        </p-datepicker>}
+
+          @if(dateWithin() === 'weekly'){
+        <p-datepicker [ngModel]="rangeDate()" (ngModelChange)="rangeDate.set($event)" selectionMode="range" [showIcon]="true" panelStyleClass="compact-calendar"
+          inputStyleClass="rounded-md px-3 h-8 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 w-full border ">
+        </p-datepicker>}
+
+          @if(dateWithin() === 'custom'){
+        <p-datepicker [ngModel]="customDateData()" (ngModelChange)="setCustomDateRange($event)" selectionMode="range" [showIcon]="true" panelStyleClass="compact-calendar"
+          inputStyleClass="rounded-md px-3 h-8 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 w-full border ">
+        </p-datepicker>}
+      </div>
+    </div>
+
+    <div class="flex gap-4 mb-4">
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Location Type</label>
+        <select (change)="LocType.set($any($event.target).value)"
+          class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Select</option>
+          <option value="Branch">Branch</option>
+          <option value="District">District</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Location Code</label>
+        <input type="text" [(ngModel)]="LocCode" placeholder="666666" 
+          class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+    </div>
+
+    <div class="flex flex-col mb-4">
+      <label class="text-sm text-gray-600 mb-1">Customer Name</label>
+      <input type="text"  placeholder="Enter Customer Name"  [ngModel]="CustomerName()" (ngModelChange)="CustomerName.set($event)"
+        class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <div class="flex gap-4 mb-6">
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Phone Number</label>
+        <input type="text" [(ngModel)]="phoneNumber" (ngModelChange)="phoneNumber.set($event)" placeholder="Enter Phone Number" 
+          class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <div class="flex flex-col w-1/2">
+        <label class="text-sm text-gray-600 mb-1">Rental Agreement #</label>
+        <input type="text" placeholder="Enter RA"  [ngModel]="rentAgreement()" (ngModelChange)="rentAgreement.set($event)"
+          class="border border-gray-400 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <button (click)="clearAll()"  class="text-sm text-gray-600 hover:underline">Clear All</button>
+
+      <button (click)="onSearch()"  class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md text-sm font-medium">
+        Search
+      </button>
+    </div>
+
+  </div>
+</div>}

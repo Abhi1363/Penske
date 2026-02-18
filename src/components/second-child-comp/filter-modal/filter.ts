@@ -1,4 +1,4 @@
-import { Component, inject, Signal,OnInit,effect  } from '@angular/core';
+import { Component, inject, Signal, OnInit, effect } from '@angular/core';
 import { signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,29 +9,53 @@ import { HostListener, ViewChild, ElementRef } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { DatePickerModule } from 'primeng/datepicker';
 import { Output, EventEmitter } from '@angular/core';
+import { FilterService } from '../../../services/filter-service/filter-service';
 
 
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports:[CommonModule,FormsModule, DatePickerModule],
+  imports: [CommonModule, FormsModule, DatePickerModule],
   templateUrl: './filter.html',
 })
 
 export class Filter implements OnInit {
   @Output() filtered = new EventEmitter<Reservation[]>();
-   ngOnInit() {
-    this.filtered.emit(this.data);
+
+  ngOnInit() {
+    this.displayData = this.filteredData();
+    this.filtered.emit(this.filteredData());
   }
 
- // Dependencies
+  // Dependencies
   sharedService = inject(SharedService);
   router = inject(Router);
-
+  filterService = inject(FilterService);
 
   // Data
   data = this.sharedService.reservationData();
   displayData: Reservation[] = [];
+
+  isFilterOpen = signal(false);
+
+  @ViewChild('filterPanel') filterPanel!: ElementRef;
+
+  closeFilter() {
+    this.isFilterOpen.set(false);
+    this.selectSection('status');
+  }
+  toggleFilter(event: MouseEvent) {
+    event.stopPropagation();
+    this.isFilterOpen.set(!this.isFilterOpen());
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (this.isFilterOpen() && this.filterPanel &&
+      !this.filterPanel.nativeElement.contains(event.target)) {
+      this.closeFilter();
+    }
+  }
 
   // Status Filters
 
@@ -70,7 +94,7 @@ export class Filter implements OnInit {
 
   // Combined Filtering Logic
   filteredData = computed(() => {
-    const result = this.data
+    let result = this.data
       .filter((item: Reservation) => this.filterByStatus(item))
       .filter((item: Reservation) => this.filterByTrip(item))
       .filter((item: Reservation) => this.filterById(item))
@@ -82,8 +106,10 @@ export class Filter implements OnInit {
     if (this.appliedPickUpDate()) {
       return [...result].sort(this.sortbyDate);
     }
+
     return result;
   });
+
 
 
   filterByStatus(item: Reservation) {
@@ -164,8 +190,10 @@ export class Filter implements OnInit {
   }
 
   filterByDate(itemDate: string | Date): boolean {
+    this.filtered.emit(this.data);
     const selected = this.selectedDate();
     if (!selected) return true;
+
 
     const item = new Date(itemDate);
 
@@ -173,9 +201,12 @@ export class Filter implements OnInit {
       item.getFullYear() === selected.getFullYear() &&
       item.getMonth() === selected.getMonth() &&
       item.getDate() === selected.getDate()
-    );
-  }
 
+
+    );
+
+
+  }
   // Sort by Customer Name
 
   tempCustomerName = signal(false);
@@ -232,49 +263,31 @@ export class Filter implements OnInit {
 
     this.displayData = this.filteredData();
     this.filtered.emit(this.filteredData());
-
+    
   }
 
-  isFilterOpen = signal(false);
+  defaultDate = signal<Date>(new Date());
 
-  @ViewChild('filterPanel') filterPanel!: ElementRef;
-
-  closeFilter() {
-    this.isFilterOpen.set(false);
-    this.selectSection('status');
-  }
-  toggleFilter(event: MouseEvent) {
-    event.stopPropagation();
-    this.isFilterOpen.set(!this.isFilterOpen());
+  defaultfilterByDate(itemDate: string | Date): boolean {
+    return this.filterService.defaultFilterByDate(itemDate, this.defaultDate());
   }
 
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: MouseEvent) {
-    if (this.isFilterOpen() && this.filterPanel &&
-      !this.filterPanel.nativeElement.contains(event.target)) {
-      this.closeFilter();
-    }
+  activeDate(): Date {
+    return this.selectedDate() ?? this.defaultDate();
   }
 
-  clearFilters() {
-    this.clearStatus('LS');
-    this.clearStatus('HH');
-    this.clearStatus('PR');
+  nextDate() {
+    const currentDate = this.activeDate();
+    const nextDay = this.filterService.nextDate(currentDate);
+    this.selectedDate.set(nextDay);
+    this.filtered.emit(this.filteredData());
+  }
 
-    this.clearTrip('OneWay');
-    this.clearTrip('RoundTrip');
-
-    this.clearId();
-
-    this.clearDate();
-
-    this.clearSortByName();
-
-    this.clearPickUpDate();
-
-    this.closeFilter();
-
-     this.filtered.emit(this.data);
+  prevDate() {
+    const currentDate = this.activeDate();
+    const prevDay = this.filterService.prevDate(currentDate);
+    this.selectedDate.set(prevDay);
+    this.filtered.emit(this.filteredData());
   }
 
   //for making html template easy for looping
@@ -306,7 +319,8 @@ export class Filter implements OnInit {
       [`checked${type}`]: false,
     }));
 
-    this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
+
   }
 
   clearTrip(type?: 'OneWay' | 'RoundTrip') {
@@ -320,31 +334,59 @@ export class Filter implements OnInit {
       [`checked${type}`]: false,
     }));
 
-    this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
   }
 
   clearId() {
     this.tempReservationIdInput.set('');
     this.appliedReservationIdInput.set('');
-    this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
 
   }
 
   clearDate() {
     this.tempSelectedDate.set(null);
     this.selectedDate.set(null);
-    this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
+
   }
+
   clearSortByName() {
     this.tempCustomerName.set(false);
     this.appliedCustomerName.set(false);
-    this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
   }
   clearPickUpDate() {
     this.tempPickUpDate.set(false);
     this.appliedPickUpDate.set(false);
 
-     this.filtered.emit(this.data);  }
+    this.filtered.emit(this.filteredData());
+  }
+
+
+  clearFilters() {
+    this.clearStatus('LS');
+    this.clearStatus('HH');
+    this.clearStatus('PR');
+
+    this.clearTrip('OneWay');
+    this.clearTrip('RoundTrip');
+
+    this.clearId();
+
+    this.tempSelectedDate.set(null);
+    this.selectedDate.set(null);
+
+    this.clearSortByName();
+
+    this.clearPickUpDate();
+
+    this.closeFilter();
+
+    // Emit filtered data
+    this.displayData = this.filteredData();
+    this.filtered.emit(this.filteredData());
+  }
 
 
   hasActiveFilters = computed(() =>
@@ -356,9 +398,9 @@ export class Filter implements OnInit {
     !!this.appliedReservationIdInput() ||
     !!this.selectedDate() ||
     this.appliedCustomerName() ||
-    this.appliedPickUpDate() 
+    this.appliedPickUpDate()
 
-  
+
   );
 
 
@@ -375,7 +417,7 @@ export class Filter implements OnInit {
 
   constructor() {
     this.displayData = this.filteredData();
-     this.filtered.emit(this.data);
+    this.filtered.emit(this.filteredData());
     console.log('Received Data in Second Child Component:', this.filteredData());
     console.log('Lease Reservations:', this.lease);
     console.log('Confirmed Reservations:', this.confirmed);
@@ -385,6 +427,6 @@ export class Filter implements OnInit {
 
   }
 
- 
+
 }
 

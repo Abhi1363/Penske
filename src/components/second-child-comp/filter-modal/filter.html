@@ -1,6 +1,8 @@
-   @if(isFilterOpen()) {
-            <div #filterPanel
-                class="bg-white w-[450px] rounded-md border-gray-300 shadow-lg border absolute top-12 left-88 z-50"
+      @if(isFilterOpen()) {
+             <div class="fixed inset-0 flex items-center justify-center bg-black/20 z-10 ">
+   
+                <div #filterPanel
+                class="bg-white w-[450px] rounded-md border-gray-300 shadow-lg border absolute top-20 left-88 z-50"
                 (click)="$event.stopPropagation()">
                 <!-- Header -->
                 <div class="flex items-center justify-between px-4 py-2.5 border-b">
@@ -109,12 +111,6 @@
                                 (ngModelChange)="onDateChange($event)" dateFormat="dd/mm/yy" showIcon="true">
                             </p-datepicker>
 
-
-                            <!-- @if(selectedDate()) {
-                    <button class="text-red-600 text-xl cursor-pointer px-4" (click)="clearDate()"> &times;
-              </button>
-                            } -->
-
                         </div>
                         } @if(activeSection === 'sort'){
                         <div class="flex flex-col  gap-2">
@@ -144,7 +140,7 @@
                         Apply
                     </button>
                 </div>
-            </div>}
+            </div>
 
 
 
@@ -207,14 +203,6 @@
                     </button>
                 </div>}
 
-
-                <!-- @else if(selectedDate()) {
-                <div class="bg-gray-200 px-3 py-1 rounded-md flex items-center gap-2  ">
-                    <span class="text-sm">{{ selectedDate() | date:'yyyy-MM-dd' }}</span>
-                    <button class="text-red-600 cursor-pointer" (click)="clearDate()">
-                        &times;
-                    </button>
-                </div>} -->
                 @else if(appliedCustomerName()) {
                 <div class="bg-gray-200 px-3 py-1 rounded-md flex items-center gap-2  ">
                     <span class="text-sm">SortByCustomerName <i class="fa-solid fa-arrow-down"></i> </span>
@@ -232,3 +220,4 @@
                 </div>}
 
             </div>
+            </div>}

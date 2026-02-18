@@ -13,16 +13,20 @@ export interface Reservation {
     unitStatus?: string;
   };
 
+
   assignedTowUnit?: {
     unitNumber?: string;
   };
 
   cashDeposit?: boolean;
   
-  pickUp: {pickUpDate: string;};
+  pickUp: {pickUpDate: string; pickUpLocation?: { locationType?: string } };
+  dropOff:{dropOffLocation?: { locationCode?: string }; dropOffDate?: string;  };
+  
    consumerCustomer: {
     firstName: string;
     lastName: string;
+    phoneNumber: number;
   };
   rentalType: string;
   tripTypeToolTip?: string;

@@ -1,45 +1,67 @@
-<div class="sticky-top bg-white shadow-sm pb-3 pt-2">
-  <div class="d-flex  justify-content-between align-items-center mx-5  mb-3">
-    <h3>Other Location:</h3>
-    <div class="d-flex justify-content-end mx-5">
-      <button class="btn btn-outline-primary" (click)="backToFirst()"> ← Back</button>
+<div class="sticky top-0 bg-white shadow-sm pb-3 pt-2">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center mx-10 mb-3">
+    <h3 class="text-xl font-semibold">Other Location:</h3>
+
+    <div class="flex justify-end">
+      <button
+        class="border border-blue-500 text-blue-500 px-4 py-1 rounded hover:bg-blue-500 hover:text-white transition"
+        (click)="backToFirst()">
+        ← Back
+      </button>
     </div>
   </div>
-  <div class="container mt-3">
-    <div class="border rounded p-3 d-flex align-items-center gap-3 justify-content-center">
 
-      <div class=" fw-bold">
+  <!-- Filter Section -->
+  <div class="mt-3 px-6">
+    <div class="border rounded p-3 flex flex-wrap items-center gap-6 justify-center">
+
+      <div class="font-bold">
         CDL Category:
       </div>
 
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="cdlType" id="cdl" (change)="selectedType = 'CDL'" checked>
-        <label class="form-check-label" for="cdlUnits">CDL</label>
-      </div>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="cdlType"
+               (change)="selectedType = 'CDL'" checked
+               class="accent-blue-600">
+        <span>CDL</span>
+      </label>
 
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="cdlType" id="ncdl" (change)="selectedType = 'NCDL'">
-        <label class="form-check-label" for="ncdl">NCDL</label>
-      </div>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="cdlType"
+               (change)="selectedType = 'NCDL'"
+               class="accent-blue-600">
+        <span>NCDL</span>
+      </label>
 
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="cdlType" id="nullopt" (change)="selectedType = null">
-        <label class="form-check-label" for="null">N/A</label>
-      </div>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="cdlType"
+               (change)="selectedType = null"
+               class="accent-blue-600">
+        <span>N/A</span>
+      </label>
 
     </div>
-    <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" class="form-control mt-3 w-25">
+
+    <input
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchTerm"
+      class="mt-3 w-full sm:w-1/4 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
   </div>
 
 </div>
 
+
+<!-- CDL -->
 @if(selectedType === 'CDL'){
-<div class="container mt-4 ">
-  <div class="row justify-content-start g-3">
+<div class="mt-6 px-6">
+  <div class="flex flex-wrap gap-4">
 
     @for(u of cdlUnits; track $index){
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card h-100 m-0 p-3 bg-light">
+    <div class="w-full sm:w-[48%] md:w-[31%] lg:w-[23%]">
+      <div class="h-full p-4 bg-gray-100 rounded shadow-sm">
         <p><strong>Unit Number:</strong> {{ u.unitNumber }}</p>
         <p><strong>CDL Category:</strong> {{ u.cdlCategory || 'N/A' }}</p>
         @if(u.unitDescription){
@@ -56,13 +78,15 @@
 </div>
 }
 
+
+<!-- NCDL -->
 @if(selectedType === 'NCDL'){
-<div class="container mt-4">
-  <div class="row justify-content-start g-3">
+<div class="mt-6 px-6">
+  <div class="flex flex-wrap gap-4">
 
     @for(u of ncdlUnits; track $index){
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card h-100 m-0 p-3 bg-light">
+    <div class="w-full sm:w-[48%] md:w-[31%] lg:w-[23%]">
+      <div class="h-full p-4 bg-gray-100 rounded shadow-sm">
         <p><strong>Unit Number:</strong> {{ u.unitNumber }}</p>
         <p><strong>CDL Category:</strong> {{ u.cdlCategory || 'N/A' }}</p>
         @if(u.unitDescription){
@@ -80,13 +104,14 @@
 }
 
 
+<!-- NULL -->
 @if(selectedType === null){
-<div class="container mt-4">
-  <div class="row justify-content-start g-3">
+<div class="mt-6 px-6">
+  <div class="flex flex-wrap gap-4">
 
     @for(u of nullUnits; track $index){
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="card h-100 m-0 p-3 bg-light">
+    <div class="w-full sm:w-[48%] md:w-[31%] lg:w-[23%]">
+      <div class="h-full p-4 bg-gray-100 rounded shadow-sm">
         <p><strong>Unit Number:</strong> {{ u.unitNumber }}</p>
         <p><strong>CDL Category:</strong> {{ u.cdlCategory || 'N/A' }}</p>
         @if(u.unitDescription){
