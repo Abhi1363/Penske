@@ -1,5 +1,13 @@
 <div class="flex flex-col  px-2  ">
+    <div class="flex justify-end p-3">
+        <button
+            class="border border-blue-500 text-blue-500 px-4 py-1 rounded hover:bg-blue-500 hover:text-white transition"
+            (click)="backToFirst()">
+            ← Back
+        </button>
+    </div>
     <div class="flex gap-4  border-1 border-gray-500 p-2  rounded-sm">
+
         <!-- LEFT -->
         <div class="w-3/5 flex flex-col gap-2 relative  overflow-y-auto  border-1 border-gray-300 rounded-lg p-2 ">
             <div class=""></div>
@@ -38,16 +46,46 @@
             <div class="flex gap-3 items-center border-1 border-gray-300  p-2">
                 @if (searchModal.dateWithin() === 'daily') {
                 <span class="text-sm font-medium">
-                    {{ (filterComp.defaultDate() ) | date:'MMMM d, yyyy' }}
+                    {{ (filterComp.defaultDate()) | date:'MMMM d, yyyy' }}
                 </span>}
                 @else if(searchModal.dateWithin()==='weekly'|| searchModal.dateWithin()==='custom') {
                 <span class="text-sm font-medium">
                     {{ searchModal.rangeDate()[0] | date:'MMMM d' }} - {{ searchModal.rangeDate()[1] | date:'MMMM d' }}
                 </span>}
 
-
-
             </div>
+
+
+            @let status = filterComp.appliedStatusFilters();
+
+            @if (status.checkedLS) {
+                <div class="flex gap-2 justify-center items-center w-[50px] bg-[#F3F4F6] px-2">
+            <span class="w-auto text-sm font-semibold text-green-600">LS</span> <span class="cursor-pointer" (click)="filterComp.clearStatus('LS')">x</span></div>
+            } @else if (status.checkedHH) {
+            <span class="w-auto text-sm font-semibold text-yellow-600">HH</span><span class="cursor-pointer" (click)="filterComp.clearStatus('HH')">x</span>
+            } @else if (status.checkedPR) {
+            <span class="w-auto text-sm font-semibold text-red-600">PR</span><span class="cursor-pointer" (click)="filterComp.clearStatus('PR')">x</span>
+            }
+            @let trip = filterComp.appliedtripFilters();
+            @if (trip.checkedOneWay) {
+                   <div class="flex gap-2 justify-center items-center w-[50px] bg-[#F3F4F6] px-2">
+            <span class="w-auto text-sm font-semibold text-green-600">1TW</span> <span class="cursor-pointer" (click)="filterComp.clearTrip('OneWay')">x</span></div>
+            } @else if (trip.checkedRoundTrip) {
+                   <div class="flex gap-2 justify-center items-center w-[50px] bg-[#F3F4F6] px-2">
+            <span class="w-auto text-sm font-semibold text-green-600">2TW</span> <span class="cursor-pointer" (click)="filterComp.clearTrip('RoundTrip')">x</span></div>
+            }
+            @let resId = filterComp.appliedReservationIdInput();
+            @if (resId) {
+                   <div class="flex gap-2 justify-center items-center  w-[120px] bg-[#F3F4F6] px-2">   
+            <span class="w-auto text-sm font-semibold text-green-600">ID: {{ resId }}</span> <span class="cursor-pointer" (click)="filterComp.clearId()">x</span></div>
+            }
+
+             @let date = filterComp.selectedDate();
+            @if (date) {
+                   <div class="flex gap-2 justify-center items-center  w-[100px] bg-[#F3F4F6] px-2">   
+            <span class="w-auto text-sm font-semibold text-green-600">{{ date | date:'dd/MM/yy' }}</span> <span class="cursor-pointer" (click)="filterComp.clearDate()">x</span></div>
+            }
+
 
             <div class=" h-[75vh] flex flex-col gap-3 overflow-y-auto border-1 border-gray-300 p-2">
                 @if(searchModal.dateWithin() === 'daily') {
@@ -184,12 +222,8 @@
                                             item.dropOff?.dropOffLocation?.locationCode }}
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
-
-
                         </div>
 
                         @if(item.reservationStatus === 'waitlist') {
@@ -277,7 +311,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="flex justify-start gap-2">
                                     <div class="flex items-center min-h-[28px] gap-2">
                                         <span class="max-w-[120px] w-auto text-sm text-gray-500 shrink-0 ">
@@ -335,16 +368,7 @@
                                     </div>
                                 </div>
 
-
-                                <!-- <span>Reservation Id</span>
-                        <span class="font-semibold text-gray-800">{{ item.reservationId }}</span> -->
-
-
-                                <!-- <span>Pickup Date</span>
-                        <span class="font-semibold text-gray-800">{{item.pickUp.pickUpDate}}</span> -->
-
                             </div>
-
 
                         </div>
 
@@ -356,7 +380,6 @@
                         </div>
                         }
                     </div>
-
                     }
 
                     }
@@ -366,7 +389,6 @@
 
                 }
                 }
-
 
                 @else {
                 <div class="w-full border rounded-md border-gray-400 flex justify-center items-center py-8 h-[68vh]">
@@ -459,11 +481,8 @@
                     }
                     }}
 
-
-
                     <!-- Truck - otherLocation -->
-
-
+                     
                     @if (selectedMode() === 'Truck' && activeType === 'OtherLocation') {
                     @for (unit of othLocflatUnits(); track unit.unitNumber ){
                     @if ( unit.unitClassCode !== '9000' && unit.unitClassCode !== '9200' && unit.unitClassCode !==
@@ -649,3 +668,6 @@
             <span>Select a reservation card to see more details.</span>
         </div>
         }
+
+    </div>
+</div>     

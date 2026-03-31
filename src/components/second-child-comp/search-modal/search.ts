@@ -36,13 +36,10 @@ export class SearchModal implements OnInit {
     this.isSearchOpen.emit(this.searchOpen());
   }
 
-
   dateWithin = signal<string>('daily');
   rangeDate = signal<Date[]>([]);
   customDateData = signal<Reservation[]>([]);
-
   currentDate: Date | null = new Date();
-
 
   onDateWithinChange() {
     // Only set up date state when the mode changes. Do not perform filtering here.
@@ -74,13 +71,10 @@ export class SearchModal implements OnInit {
   filterByWeekly(itemDate: string | Date): boolean {
 
     const range = this.rangeDate();
-
     if (!Array.isArray(range) || range.length !== 2) return true;
-
     const item = new Date(itemDate).setHours(0, 0, 0, 0);
     const start = new Date(range[0]).setHours(0, 0, 0, 0);
     const end = new Date(range[1]).setHours(0, 0, 0, 0);
-
 
     return item >= start && item <= end;
 
@@ -92,16 +86,12 @@ export class SearchModal implements OnInit {
     return dateA.getTime() - dateB.getTime();
   }
 
-
   setWeeklyRange() {
     const today = new Date();
-
     const weekAhead = new Date();
     weekAhead.setDate(today.getDate() + 7);
 
     this.rangeDate.set([today, weekAhead]);
-
-
   }
   weeklyData() {
     const data = this.data()?.filter((item: Reservation) =>
@@ -111,11 +101,10 @@ export class SearchModal implements OnInit {
 
   setCustomDateRange(dates: Date[]) {
     this.rangeDate.set(dates);
-
   }
 
   filterByCustomDate(itemDate: string | Date): boolean {
-    const range = this.rangeDate(); // [startDate, endDate]
+    const range = this.rangeDate();
 
     if (!Array.isArray(range) || range.length !== 2) return false;
 
@@ -130,7 +119,6 @@ export class SearchModal implements OnInit {
     const data = this.filterbydaily();
     this.SearchedData.emit(data);
   }
-
 
   applyWeekly() {
     this.weeklyData();
@@ -159,7 +147,6 @@ export class SearchModal implements OnInit {
     this.SearchedData.emit(this.customDateData());
   }
 
-
   clearDateWithin() {
     this.dateWithin.set('daily');
     this.currentDate = new Date();
@@ -167,7 +154,6 @@ export class SearchModal implements OnInit {
     this.customDateData.set([]);
     this.applyDaily();
     this.SearchedData.emit(this.filterbydaily());
-
   }
 
   LocType = signal<string>('');

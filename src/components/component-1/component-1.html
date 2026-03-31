@@ -1,60 +1,70 @@
 <!-- Header -->
-<div class="flex flex-col md:flex-row md:justify-between md:items-center bg-gray-100 mb-4 p-4 rounded">
-  
-  <h2 class="text-2xl font-semibold">Dashboard</h2>
+<div
+    class="flex flex-col md:flex-row md:justify-between md:items-center bg-white border border-gray-200 shadow-sm mb-6 px-6 py-4 rounded-lg sticky top-0">
 
-  <div class="flex flex-wrap gap-3 justify-center mt-3 md:mt-0">
-    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" (click)="showChild()">Child 1</button>
-    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded" (click)="showSecondChild()">Child 2</button>
-    <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded" (click)="showThirdChild()">Child 3</button>
-    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded" (click)="showFourthChild()">Child 4</button>
-  </div>
+    <h2 class="text-2xl font-semibold text-gray-800">Dashboard</h2>
+
+    <div class="flex flex-wrap gap-3 justify-center mt-3 md:mt-0">
+        <button
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            (click)="showChild()">Child 1</button>
+        <button
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            (click)="showSecondChild()">Child 2</button>
+        <button
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            (click)="showThirdChild()">Child 3</button>
+        <button
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium text-white bg-red-600 hover:bg-red-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+            (click)="showFourthChild()">Child 4</button>
+    </div>
 
 </div>
 
 <!-- Cards -->
 @for (loc of data().myLocation; track $index){
-<div class="bg-white shadow-md rounded-lg mb-6 p-6 flex flex-col gap-4">
+<div
+    class="bg-white border border-gray-200 shadow-sm rounded-lg mb-6 p-6 hover:shadow-lg transition-shadow duration-150">
 
     <!-- Total Units -->
-    <h5 class="text-green-600 font-semibold text-lg">
+    <h5 class="text-gray-700 font-semibold text-lg">
         1. Total Units:
-        <span class="text-blue-600 font-bold">{{ loc.totalUnits }}</span>
+        <span class="text-indigo-600 font-bold">{{ loc.totalUnits }}</span>
     </h5>
 
     <!-- Available Section -->
     <div class="flex flex-col gap-2">
-        <h5 class="text-green-600 font-semibold text-lg">2. Available</h5>
+        <h5 class="text-gray-700 font-semibold text-lg">2.Available</h5>
         <p>
             Total Units:
             <strong>{{ loc.available.totalUnits }}</strong>
         </p>
 
         @for(unit of loc.available.availableUnits; track $index){
-        <div class="border rounded-lg p-4 flex flex-col gap-2">
+        <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
 
-            <p class="font-medium">Available Units:</p>
+            <p class="font-medium text-gray-700">Available Units:</p>
 
-            <p class="font-semibold">
+            <p class="font-semibold text-gray-800">
                 Unit Class:
-                <span class="text-gray-800">{{ unit.unitClass }}</span>
+                <span class="text-gray-900">{{ unit.unitClass }}</span>
             </p>
 
             <h6 class="text-gray-500 font-medium">Recommended Units</h6>
 
             <div class="flex flex-wrap gap-3">
                 @for(unitNum of unit.recommendUnits; track $index){
-                <div class="border rounded-md p-3 w-full md:w-[48%] lg:w-[30%] flex flex-col gap-1">
+                <div class="border border-gray-200 rounded-md p-4 w-full md:w-1/2 lg:w-1/3 bg-white shadow-sm">
 
-                    <p>
+                    <p class="text-sm text-gray-700">
                         <strong>Unit Number:</strong> {{ unitNum.unitNumber }}
                     </p>
 
-                    <p>
+                    <p class="text-sm text-gray-600">
                         <strong>Status:</strong> {{ unitNum.unitStatus }}
                     </p>
 
-                    <p>
+                    <p class="text-sm text-gray-600">
                         <strong>Class Code:</strong> {{ unitNum.unitClassCode }}
                     </p>
 
@@ -68,7 +78,7 @@
 
     <!-- Hold Section -->
     <div class="flex flex-col gap-2">
-        <h5 class="text-green-600 font-semibold text-lg">3. Hold</h5>
+        <h5 class="text-gray-700 font-semibold text-lg">3. Hold</h5>
         <p>
             Total Units: {{ loc.hold.totalUnits }}
         </p>
@@ -76,15 +86,15 @@
 
     <!-- NonRev Section -->
     <div class="flex flex-col gap-2">
-        <h5 class="text-green-600 font-semibold text-lg">4. NonRev</h5>
+        <h5 class="text-gray-700 font-semibold text-lg">4. NonRev</h5>
         <p>
             Total Units: {{ loc.nonRev.totalUnits }}
         </p>
 
         <div class="flex flex-wrap gap-3">
             @for(nonRev of loc.nonRev.nonRevUnits; track $index){
-            <div class="border rounded-lg p-3 w-full md:w-[48%] lg:w-[30%]">
-                <p>
+            <div class="border border-gray-200 rounded-lg p-3 w-full md:w-1/2 lg:w-1/3 bg-white shadow-sm">
+                <p class="text-sm text-gray-700">
                     <strong>Unit Class:</strong> {{ nonRev.unitClass }}
                 </p>
             </div>

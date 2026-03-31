@@ -35,8 +35,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(410) 555-0187',
             },
             pickUpTime: '10:24:12',
-            pickUpDate: '2026-02-16',
-            pickUpUTCTimestamp: '2026-02-16 10:24:12.605',
+            pickUpDate: '2026-02-27',
+            pickUpUTCTimestamp: '2026-02-27 10:24:12.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -168,8 +168,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(312) 555-0144',
             },
             pickUpTime: '08:00:00',
-            pickUpDate: '2026-02-13',
-            pickUpUTCTimestamp: '2026-02-13 08:00:00.000',
+            pickUpDate: '2026-02-23',
+            pickUpUTCTimestamp: '2026-02-23 08:00:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -208,7 +208,7 @@ export const RESERVATIONS = [
             unitType: '2030',
             unitStatus: 'Out-commercial',
             source: 'Penske',
-            unitDescription: "53' TRAILER",
+            unitDescription: "53' TRAILER", 
             owningLocationCode: '998811',
             owningCorp: 'HPTL',
             physicalLocationCode: '998811',
@@ -278,8 +278,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(602) 555-0101',
             },
             pickUpTime: '09:15:00',
-            pickUpDate: '2026-02-17',
-            pickUpUTCTimestamp: '2026-02-17 09:15:00.000',
+            pickUpDate: '2026-02-25',
+            pickUpUTCTimestamp: '2026-02-25 09:15:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -388,8 +388,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(404) 555-0166',
             },
             pickUpTime: '07:00:00',
-            pickUpDate: '2026-02-13',
-            pickUpUTCTimestamp: '2026-02-13 07:00:00.000',
+            pickUpDate: '2026-02-26',
+            pickUpUTCTimestamp: '2026-02-26 07:00:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -498,8 +498,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(206) 555-0145',
             },
             pickUpTime: '11:00:00',
-            pickUpDate: '2026-02-19',
-            pickUpUTCTimestamp: '2026-02-19 11:00:00.000',
+            pickUpDate: '2026-02-24',
+            pickUpUTCTimestamp: '2026-02-24 11:00:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -608,8 +608,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(619) 555-0133',
             },
             pickUpTime: '06:45:00',
-            pickUpDate: '2026-02-14',
-            pickUpUTCTimestamp: '2026-02-14 06:45:00.000',
+            pickUpDate: '2026-02-26',
+            pickUpUTCTimestamp: '2026-02-26 06:45:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -718,8 +718,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(303) 555-0129',
             },
             pickUpTime: '14:30:00',
-            pickUpDate: '2026-02-18',
-            pickUpUTCTimestamp: '2026-02-18 14:30:00.000',
+            pickUpDate: '2026-02-25',
+            pickUpUTCTimestamp: '2026-02-25 14:30:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -828,8 +828,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(617) 555-0190',
             },
             pickUpTime: '08:20:00',
-            pickUpDate: '2026-02-12',
-            pickUpUTCTimestamp: '2026-02-12 08:20:00.000',
+            pickUpDate: '2026-02-23',
+            pickUpUTCTimestamp: '2026-02-23 08:20:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -938,8 +938,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(214) 555-0123',
             },
             pickUpTime: '09:15:00',
-            pickUpDate: '2026-02-11',
-            pickUpUTCTimestamp: '2026-02-11 09:15:00.000',
+            pickUpDate: '2026-02-27',
+            pickUpUTCTimestamp: '2026-02-27 09:15:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -1070,8 +1070,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(602) 555-0144',
             },
             pickUpTime: '13:00:00',
-            pickUpDate: '2026-02-18',
-            pickUpUTCTimestamp: '2026-02-18 13:00:00.000',
+            pickUpDate: '2026-02-24',
+            pickUpUTCTimestamp: '2026-02-24 13:00:00.000',
         },
         dropOff: {
             dropOffLocation: {
@@ -1202,8 +1202,8 @@ export const RESERVATIONS = [
                 phoneNumber: '(312) 555-0190',
             },
             pickUpTime: '08:45:00',
-            pickUpDate: '2026-02-16',
-            pickUpUTCTimestamp: '2026-02-16 08:45:00.000',
+            pickUpDate: '2026-02-28',
+            pickUpUTCTimestamp: '2026-02-28 08:45:00.000',
         },
         dropOff: {
             dropOffLocation: {

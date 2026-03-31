@@ -18,14 +18,13 @@ export class FilterService {
     );
   }
 
-
+ 
   nextDate(currentDate: Date): Date {
     const nextDay = new Date(currentDate);
     nextDay.setDate(currentDate.getDate() + 1);
     return nextDay;
   }
 
- 
   prevDate(currentDate: Date): Date {
     const prevDay = new Date(currentDate);
     prevDay.setDate(currentDate.getDate() - 1);

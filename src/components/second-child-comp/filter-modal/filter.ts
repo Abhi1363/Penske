@@ -56,7 +56,6 @@ export class Filter implements OnInit {
       this.closeFilter();
     }
   }
-
   // Status Filters
 
   tempStatusFilters = {
@@ -71,7 +70,6 @@ export class Filter implements OnInit {
     checkedPR: false,
   });
 
-  // Status-based getters
   get lease() {
     return this.data.filter((res: Reservation) => res.reservationStatus === 'lease');
   }

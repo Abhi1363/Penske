@@ -9,6 +9,7 @@ import { inject } from '@angular/core';
 import { DatePickerModule } from 'primeng/datepicker';
 import { FormsModule } from '@angular/forms';
 import { SearchModal } from './search-modal/search';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-second-child-comp',
@@ -19,6 +20,8 @@ import { SearchModal } from './search-modal/search';
 export class SecondChildComp {
   sharedService = inject(SharedService);
   receivedData = computed(() => this.sharedService.responseData());
+
+  router = inject(Router);
 
   activeRight = signal(false);
 
@@ -165,11 +168,15 @@ export class SecondChildComp {
     );
   }
 
-
+    backToFirst() {
+    this.router.navigate(['component-1']);
+  }
+  
   constructor() {
     console.log('Mock Data:', this.receivedData());
     console.log('Flat Units My Location:', this.myLocflatUnits());
     console.log('Flat Units other Location:', this.othLocflatUnits());
+
 
   }
 
